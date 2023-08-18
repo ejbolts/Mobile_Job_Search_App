@@ -20,14 +20,13 @@ const jobTypes = [
   "Volunteer",
 ];
 
-const Welcome = ({ handleClick }) => {
+const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   const router = useRouter();
   const [activeJobType, setActiveJobType] = useState("Full-time");
 
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Ethan!</Text>
         <Text style={styles.welcomeMessage}>Find your perfect job</Text>
       </View>
 
@@ -35,8 +34,8 @@ const Welcome = ({ handleClick }) => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value={""}
-            onChangeText={(text) => {}}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
             placeholder="What are you looking for?"
           />
         </View>

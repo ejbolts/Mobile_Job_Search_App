@@ -45,7 +45,6 @@ const Popularjobs = () => {
           <FlatList
             data={data}
             renderItem={({ item }) => {
-              console.log("this is console item", item.employer_name); // works fine shows the names
               return (
                 <PopularJobCard
                   item={item}
