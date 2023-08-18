@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   View,
   Text,
@@ -7,23 +6,22 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import { useRouter } from "expo-router";
 
 import styles from "./welcome.style";
 import { icons, SIZES } from "../../../constants";
 
-const jobTypes = [
-  "Full-time",
-  "Part-time",
-  "Contractor",
-  "Internship",
-  "Volunteer",
-];
+const jobTypes = ["FULLTIME", "PARTTIME", "CONTRACTOR"];
+const jobLocation = ["AU", "US", "JP", "UK", "CA", "NZ", "SG"];
 
-const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
-  const router = useRouter();
-  const [activeJobType, setActiveJobType] = useState("Full-time");
-
+const Welcome = ({
+  searchTerm,
+  setSearchTerm,
+  handleClick,
+  activeJobType,
+  setActiveJobType,
+  activeJobLocation,
+  setActiveJobLocation,
+}) => {
   return (
     <View>
       <View style={styles.container}>
@@ -51,16 +49,35 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
 
       <View style={styles.tabsContainer}>
         <FlatList
+          style={styles.tabsContainer}
           data={jobTypes}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.tab(activeJobType, item)}
               onPress={() => {
                 setActiveJobType(item);
-                router.push(`/search/${item}`);
               }}
             >
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ columnGap: SIZES.small }}
+          horizontal
+        />
+
+        <FlatList
+          data={jobLocation}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.tab(activeJobLocation, item)}
+              onPress={() => {
+                setActiveJobLocation(item);
+              }}
+            >
+              <Text style={styles.tabText(activeJobLocation, item)}>
+                {item}
+              </Text>
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item}

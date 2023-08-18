@@ -59,6 +59,31 @@ const JobSearch = () => {
         handleSearch()
     }, [])
 
+    const renderNearbyJobCard = (item) => {
+
+
+        // Split params.id and check if it contains one of the specific words
+        const wordsArray = params.id.split(" ");
+        const activeTypes = ["PARTTIME", "FULLTIME", "CONTRACTOR",];
+        const activeLocation = ["AU", "US", "JP", "UK", "CA", "NZ", "SG"];
+
+        // Find if any of the words in wordsArray matches any in activeTypes
+        const matchType = wordsArray.find(word => activeTypes.includes(word));
+        const matchLocation = wordsArray.find(word => activeLocation.includes(word));
+
+
+
+
+        return (
+            <NearbyJobCard
+                job={item}
+                handleNavigate={() => router.push(`/job-details/${item.job_id}`)}
+                activeJobType={matchType}
+                activeJobLocation={matchLocation}
+            />
+        );
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
             <Stack.Screen
@@ -78,12 +103,7 @@ const JobSearch = () => {
 
             <FlatList
                 data={searchResult}
-                renderItem={({ item }) => (
-                    <NearbyJobCard
-                        job={item}
-                        handleNavigate={() => router.push(`/job-details/${item.job_id}`)}
-                    />
-                )}
+                renderItem={({ item }) => renderNearbyJobCard(item)}
                 keyExtractor={(item) => item.job_id}
                 contentContainerStyle={{ padding: SIZES.medium, rowGap: SIZES.medium }}
                 ListHeaderComponent={() => (

@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   },
   tabsContainer: {
     width: "100%",
-    marginTop: SIZES.medium,
+    marginTop: SIZES.xSmall,
+    marginBottom: SIZES.xSmall,
   },
   tab: (activeJobType, item) => ({
     paddingVertical: SIZES.small / 2,

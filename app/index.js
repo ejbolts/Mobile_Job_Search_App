@@ -13,6 +13,9 @@ import {
 const Home = () => {
     const router = useRouter()
     const [searchTerm, setSearchTerm] = useState("");
+    const [activeJobType, setActiveJobType] = useState("FULLTIME");
+    const [activeJobLocation, setActiveJobLocation] = useState("AU");
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -42,13 +45,17 @@ const Home = () => {
                         setSearchTerm={setSearchTerm}
                         handleClick={() => {
                             if (searchTerm) {
-                                router.push(`/search/${searchTerm}`)
+                                router.push(`/search/${searchTerm} ${activeJobType} ${activeJobLocation}`)
                             }
                         }}
+                        activeJobType={activeJobType}
+                        setActiveJobType={setActiveJobType}
+                        activeJobLocation={activeJobLocation}
+                        setActiveJobLocation={setActiveJobLocation}
                     />
 
                     <Popularjobs />
-                    <Nearbyjobs />
+                    <Nearbyjobs activeJobType={activeJobType} activeJobLocation={activeJobLocation} />
                 </View>
             </ScrollView>
         </SafeAreaView>
