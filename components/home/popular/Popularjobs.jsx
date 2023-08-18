@@ -12,6 +12,7 @@ import styles from "./popularjobs.style";
 import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from "../../../hook/useFetch";
+
 const Popularjobs = () => {
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
@@ -43,13 +44,16 @@ const Popularjobs = () => {
         ) : (
           <FlatList
             data={data}
-            renderItem={({ item }) => (
-              <PopularJobCard
-                item={item}
-                selectedJob={selectedJob}
-                handleCardPress={handleCardPress}
-              />
-            )}
+            renderItem={({ item }) => {
+              console.log("this is console item", item.employer_name); // works fine shows the names
+              return (
+                <PopularJobCard
+                  item={item}
+                  selectedJob={selectedJob}
+                  handleCardPress={handleCardPress}
+                />
+              );
+            }}
             keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
