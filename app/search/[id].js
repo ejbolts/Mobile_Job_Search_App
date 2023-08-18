@@ -60,19 +60,14 @@ const JobSearch = () => {
     }, [])
 
     const renderNearbyJobCard = (item) => {
-
-
-        // Split params.id and check if it contains one of the specific words
+        // Split and check if it contains one of the specific words
         const wordsArray = params.id.split(" ");
         const activeTypes = ["PARTTIME", "FULLTIME", "CONTRACTOR",];
         const activeLocation = ["AU", "US", "JP", "UK", "CA", "NZ", "SG"];
 
-        // Find if any of the words in wordsArray matches any in activeTypes
+        // Find if any of the words in wordsArray matches 
         const matchType = wordsArray.find(word => activeTypes.includes(word));
         const matchLocation = wordsArray.find(word => activeLocation.includes(word));
-
-
-
 
         return (
             <NearbyJobCard
@@ -83,7 +78,6 @@ const JobSearch = () => {
             />
         );
     };
-
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
             <Stack.Screen

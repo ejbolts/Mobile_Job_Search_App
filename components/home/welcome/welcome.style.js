@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   searchBtn: {
     width: 50,
     height: "100%",
-    backgroundColor: COLORS.tertiary,
+    backgroundColor: COLORS.secondary,
     borderRadius: SIZES.medium,
     justifyContent: "center",
     alignItems: "center",
@@ -63,10 +63,11 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.medium,
     borderWidth: 1,
     borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
+    backgroundColor: activeJobType === item ? COLORS.secondary : COLORS.white,
   }),
   tabText: (activeJobType, item) => ({
     fontFamily: FONT.medium,
-    color: activeJobType === item ? COLORS.secondary : COLORS.gray2,
+    color: activeJobType === item ? COLORS.white : COLORS.secondary,
   }),
 });
 
