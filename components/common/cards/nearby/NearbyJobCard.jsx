@@ -13,8 +13,8 @@ const NearbyJobCard = ({
     job.job_employment_type == activeJobType &&
     job.job_country == activeJobLocation
   ) {
-    console.log("job.job_country", job.job_country);
-    console.log("activeJobLocation", activeJobLocation);
+    console.log("job: ", job.job_title);
+
     return (
       <TouchableOpacity style={styles.container} onPress={handleNavigate}>
         <TouchableOpacity style={styles.logoContainer}>

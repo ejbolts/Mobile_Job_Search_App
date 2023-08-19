@@ -68,6 +68,7 @@ const JobSearch = () => {
         // Find if any of the words in wordsArray matches 
         const matchType = wordsArray.find(word => activeTypes.includes(word));
         const matchLocation = wordsArray.find(word => activeLocation.includes(word));
+        console.log(item)
 
         return (
             <NearbyJobCard

@@ -15,7 +15,10 @@ const Home = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [activeJobType, setActiveJobType] = useState("FULLTIME");
     const [activeJobLocation, setActiveJobLocation] = useState("AU");
-
+    const handleLikePress = () => {
+        console.log("test")
+        router.push(`/liked-jobs-list`);
+    };
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -24,7 +27,7 @@ const Home = () => {
                     headerStyle: { backgroundColor: COLORS.lightWhite },
                     headerShadowVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
+                        <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' handlePress={handleLikePress} />
                     ),
                     headerRight: () => (
                         <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
