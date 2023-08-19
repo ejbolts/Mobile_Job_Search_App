@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { Stack, useRouter } from "expo-router";
-
 import { COLORS, icons, images, SIZES } from "../constants";
 import {
     Nearbyjobs,
@@ -16,8 +15,8 @@ const Home = () => {
     const [activeJobType, setActiveJobType] = useState("FULLTIME");
     const [activeJobLocation, setActiveJobLocation] = useState("AU");
     const handleLikePress = () => {
-        console.log("test")
         router.push(`/liked-jobs-list`);
+
     };
 
     return (
@@ -64,5 +63,7 @@ const Home = () => {
         </SafeAreaView>
     );
 };
+
+
 
 export default Home;

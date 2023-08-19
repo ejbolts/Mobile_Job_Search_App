@@ -1,18 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 
 import { View, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from "react-native";
 
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from "../../Mobile_Job_search_App/components/home/nearby/nearbyjobs.style.js";
 import { COLORS, SIZES, icons, images } from "../../Mobile_Job_search_App/constants";
 import testData from "./test-data.json";
 import { NearbyJobCard, ScreenHeaderBtn } from '../components'
 import { ScrollView } from "react-native-gesture-handler";
+
+import { storeData, getData, removeJobById } from './storageUtils';
+const clearStorage = async () => {
+    try {
+        await AsyncStorage.clear();
+        console.log('Storage successfully cleared!');
+    } catch (error) {
+        console.error('Error clearing storage:', error);
+    }
+};
+
+// Call the function when needed:
+
+
 export default function likedJobsList() {
-    let [likedJobsArray, setLikedJobsArray] = useState(testData.data);
+    const [likedJobs, setLikedJobs] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        //clearStorage();
+        fetchLikedJobs();
+    }, []);
+
+    const fetchLikedJobs = async () => {
+        try {
+            const retrievedJobs = await getData('likedJobs');
+            if (retrievedJobs) {
+                console.log('retrievedJobs', retrievedJobs);
+                setLikedJobs(retrievedJobs);
+            }
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching liked jobs:', error);
+            setIsLoading(false);
+        }
+    };
+
     const router = useRouter();
+    const handleJobDeletion = async (jobId) => {
+        const updatedJobs = await removeJobById(jobId);
+        setLikedJobs(updatedJobs || []);
+    }
+    if (isLoading) {
+        return <ActivityIndicator size="large" color={COLORS.primary} />;
+    }
+
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
             <Stack.Screen
@@ -34,24 +77,25 @@ export default function likedJobsList() {
             >
                 <View style={styles.header}>
                     <Text style={styles.headerTitle}>Liked jobs </Text>
-                    <TouchableOpacity>
-                        <Text style={styles.headerBtn}>Show all</Text>
+                    <TouchableOpacity >
+                        <Text style={styles.headerBtn}>Reload</Text>
                     </TouchableOpacity>
                 </View>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     {
-                        likedJobsArray?.map((job) => (
-
-                            <View style={{ height: 100, paddingBottom: 13 }}>
+                        likedJobs.map((job) => (
+                            <View key={`nearby-job-wrapper-${job.job_id}`} style={{ height: 100, paddingBottom: 13 }}>
                                 <NearbyJobCard
                                     job={job}
                                     key={`nearby-job-${job.job_id}`}
                                     handleNavigate={() => router.push(`/job-details/${job.job_id}`)}
                                     activeJobType={"FULLTIME"}
-                                    activeJobLocation={"US"}
+                                    activeJobLocation={"AU"}
                                 />
+                                <TouchableOpacity onPress={() => handleJobDeletion(job.job_id)}>
+                                    <Text style={styles.headerBtn}>Delete</Text>
+                                </TouchableOpacity>
                             </View>
-
                         ))
                     }
                 </ScrollView>

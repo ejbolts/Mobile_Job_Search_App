@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 
@@ -9,7 +9,7 @@ import useFetch from "../../../hook/useFetch";
 
 const Nearbyjobs = ({ activeJobType, activeJobLocation }) => {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("search", {
+  const { data, isLoading, error, refetch } = useFetch("search", {
     query: "Front-end developer Australia Brisbane",
     num_pages: "1",
   });
@@ -18,8 +18,8 @@ const Nearbyjobs = ({ activeJobType, activeJobLocation }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Nearby jobs (Brisbane AU)</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
+        <TouchableOpacity onPress={refetch}>
+          <Text style={styles.headerBtn}>Reload</Text>
         </TouchableOpacity>
       </View>
 
