@@ -11,24 +11,21 @@ import { NearbyJobCard, ScreenHeaderBtn } from '../components'
 import { ScrollView } from "react-native-gesture-handler";
 
 import { storeData, getData, removeJobById } from './storageUtils';
-const clearStorage = async () => {
-    try {
-        await AsyncStorage.clear();
-        console.log('Storage successfully cleared!');
-    } catch (error) {
-        console.error('Error clearing storage:', error);
-    }
-};
-
-// Call the function when needed:
 
 
 export default function likedJobsList() {
     const [likedJobs, setLikedJobs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
+    const clearStorage = async () => {
+        try {
+            await AsyncStorage.clear();
+            console.log('Storage successfully cleared!');
+            setLikedJobs([]); // Clear the local state
+        } catch (error) {
+            console.error('Error clearing storage:', error);
+        }
+    };
     useEffect(() => {
-        //clearStorage();
         fetchLikedJobs();
     }, []);
 
@@ -47,6 +44,7 @@ export default function likedJobsList() {
     };
 
     const router = useRouter();
+
     const handleJobDeletion = async (jobId) => {
         const updatedJobs = await removeJobById(jobId);
         setLikedJobs(updatedJobs || []);
@@ -77,8 +75,8 @@ export default function likedJobsList() {
             >
                 <View style={styles.header}>
                     <Text style={styles.headerTitle}>Liked jobs </Text>
-                    <TouchableOpacity >
-                        <Text style={styles.headerBtn}>Reload</Text>
+                    <TouchableOpacity onPress={clearStorage}>
+                        <Text style={styles.headerBtn}>Clear all</Text>
                     </TouchableOpacity>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
