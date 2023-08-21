@@ -4,9 +4,9 @@ import { Stack, useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from "react-native";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from "../../Mobile_Job_search_App/components/home/nearby/nearbyjobs.style.js";
-import { COLORS, SIZES, icons, images } from "../../Mobile_Job_search_App/constants";
-import testData from "./test-data.json";
+import styles from "../components/home/nearby/nearbyjobs.style";
+
+import { COLORS, SIZES, icons, images } from "../constants";
 import { NearbyJobCard, ScreenHeaderBtn } from '../components'
 import { ScrollView } from "react-native-gesture-handler";
 

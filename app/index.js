@@ -8,6 +8,8 @@ import {
     ScreenHeaderBtn,
     Welcome,
 } from "../components";
+import { StatusBar } from 'react-native';
+
 
 const Home = () => {
     const router = useRouter()
@@ -21,6 +23,8 @@ const Home = () => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+            <StatusBar barStyle="dark-content" />
+
             <Stack.Screen
                 options={{
                     headerStyle: { backgroundColor: COLORS.lightWhite },

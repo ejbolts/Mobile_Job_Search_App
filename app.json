@@ -8,6 +8,26 @@
       "expo-router"
     ],
     "name": "Mobile_Job_search_App",
-    "slug": "Mobile_Job_search_App"
+    "slug": "Mobile_Job_search_App",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "30c0e589-7dad-4b8f-b467-658bd1240f71"
+      }
+    },
+    "android": {
+      "package": "com.ebolt.Mobile_Job_search_App"
+    },
+    "ios": {
+      "bundleIdentifier": "ejboltJobSearchApp"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/30c0e589-7dad-4b8f-b467-658bd1240f71"
+    }
   }
 }
